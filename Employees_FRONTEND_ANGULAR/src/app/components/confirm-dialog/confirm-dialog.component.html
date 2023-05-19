@@ -1,0 +1,17 @@
+<div mat-dialog-title>
+  <h2>Confirmar eliminación</h2>
+</div>
+
+<div mat-dialog-content>
+  <p>¿Está seguro que desea eliminar el registro?</p>
+</div>
+
+<div mat-dialog-actions class="confirm">
+  <button mat-raised-button color warn [mat-dialog-close]="false">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <button mat-raised-button color="primary" [mat-dialog-close]="true">
+    <mat-icon>check</mat-icon>
+  </button>
+</div>

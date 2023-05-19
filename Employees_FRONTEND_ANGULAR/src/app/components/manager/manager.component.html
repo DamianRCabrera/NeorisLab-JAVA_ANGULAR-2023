@@ -1,0 +1,87 @@
+<div mat-dialog-title>
+  <h2> Agregue datos del empleado:</h2>
+</div>
+
+<form [formGroup]="employeeForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Nro. DNI</mat-label>
+        <input matInput type="number" placeholder="Ej. 38813979" formControlName="nroDocumento" min="0">
+        <mat-error *ngIf="employeeForm.get('nroDocumento')?.hasError('required')">
+          * DNI es requerido
+        </mat-error>
+        <mat-error *ngIf="employeeForm.get('nroDocumento')?.hasError('min')">
+          * DNI debe ser mayor a 1.000.000
+        </mat-error>
+        <mat-error *ngIf="employeeForm.get('nroDocumento')?.hasError('max')">
+          * DNI debe ser menor a 99.999.999
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" placeholder="Ej. test@gmail.com" formControlName="email">
+        <mat-error *ngIf="employeeForm.get('email')?.hasError('required')">
+          * Email es requerido
+        </mat-error>
+        <mat-error *ngIf="employeeForm.get('email')?.hasError('email' || 'pattern')">
+          * Ingresa un email válido
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" placeholder="Ej. Juan" formControlName="nombre">
+        <mat-error *ngIf="employeeForm.get('nombre')?.hasError('required')">
+          * Nombre es requerido
+        </mat-error>
+        <mat-error *ngIf="employeeForm.get('nombre')?.hasError('pattern' || 'minLenght')">
+          * Ingrese un nombre válido (mín. 2 car.,máx 3 nombres)
+        </mat-error>
+        <mat-error *ngIf="employeeForm.get('nombre')?.hasError('maxLength')">
+          * Nombre demasiado largo
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido</mat-label>
+        <input matInput type="text" placeholder="Ej. Pérez" formControlName="apellido">
+        <mat-error *ngIf="employeeForm.get('nombre')?.hasError('required')">
+          * Apellido es requerido
+        </mat-error>
+        <mat-error *ngIf="employeeForm.get('nombre')?.hasError('pattern' || 'minLenght')">
+          * Ingrese un apellido válido (mín. 2 car.,máx 3 apellidos)
+        </mat-error>
+        <mat-error *ngIf="employeeForm.get('nombre')?.hasError('maxLength')">
+          * Apellido demasiado largo
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input matInput [matDatepicker]="pickerNacimiento" formControlName="fechaNacimiento" [min]="minDateNacimiento"
+          [max]="maxDateNacimiento">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="pickerNacimiento"></mat-datepicker-toggle>
+        <mat-datepicker #pickerNacimiento></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de Ingreso</mat-label>
+        <input matInput [matDatepicker]="pickerIngreso" formControlName="fechaIngreso" [min]="minDateIngreso"
+          [max]="maxDateIngreso">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="pickerIngreso"></mat-datepicker-toggle>
+        <mat-datepicker #pickerIngreso></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="action">
+    <button mat-raised-button type="button" [mat-dialog-close]="false">Cancelar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!employeeForm.valid">{{data ? 'Actualizar' :
+      'Guardar'}}</button>
+  </div>
+</form>

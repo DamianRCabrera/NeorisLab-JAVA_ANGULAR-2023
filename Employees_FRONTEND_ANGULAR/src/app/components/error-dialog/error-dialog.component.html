@@ -1,0 +1,16 @@
+<div class="error-body">
+  <div mat-dialog-title>
+    <img src="../../../assets/images/warning.png" alt="Warning Icon">
+  </div>
+
+  <div mat-dialog-content>
+    <h2>Error</h2>
+    <h3>{{data}}</h3>
+  </div>
+
+  <div mat-dialog-actions class="confirm">
+    <button mat-raised-button color="warn" [mat-dialog-close]="false">
+      Aceptar
+    </button>
+  </div>
+</div>
